@@ -30,7 +30,12 @@ angular.module('empleadosApp').controller('EmpleadosCtrl', function($scope, $int
     });
   };
 
-  $interval(function() {
+  // No se estaba destruyendo el interval, por lo que se debe hacerse
+ var intervalo = $interval(function() {
     $scope.ultimaActualizacion = new Date();
   }, 1000);
+
+  $scope.$on('$destroy', function() {
+    $interval.cancel(intervalo);
+  });
 });
