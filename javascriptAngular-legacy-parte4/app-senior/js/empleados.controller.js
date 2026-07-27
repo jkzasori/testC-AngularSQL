@@ -8,7 +8,9 @@ angular.module('empleadosApp').controller('EmpleadosCtrl', function($scope, $int
 
   EmpleadoService.listar().then(function(data) {
     $scope.empleados = data;
-    $scope.resultados = data;
+    // Se estaba guardando el mismo data dos veces en el mismo array y ng-repeat lanzaba ngRepeat:dupes 
+    // Para soloculionarlo se copia el array con angular.copy para que ambas listas sean independientes
+    $scope.resultados = angular.copy(data);
   });
 
   // Cada tecla del buscador dispara una peticion "al servidor"
