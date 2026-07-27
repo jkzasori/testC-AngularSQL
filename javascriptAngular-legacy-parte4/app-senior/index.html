@@ -20,7 +20,13 @@
 
   <div class="card">
     <h2>Empleados</h2>
-    <input type="text" ng-model="busqueda" ng-change="buscar()" placeholder="Buscar en el servidor...">
+    <input 
+      type="text"
+      ng-model-options="{ debounce: 400 }"
+      ng-model="busqueda"
+      ng-change="buscar()"
+      placeholder="Buscar en el servidor..."
+    >
     <span class="meta">Peticiones de búsqueda enviadas: {{ totalPeticiones }}</span>
 
     <resumen-salarios empleados="empleados"></resumen-salarios>
