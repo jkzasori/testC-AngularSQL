@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es" ng-app="empleadosApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Gestión de Empleados — Nómina</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.3/angular.min.js"></script>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 30px; background: #f5f6fa; }
+    .card { background: #fff; padding: 20px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 1px 4px rgba(0,0,0,.1); max-width: 900px; }
+    table { width: 100%; border-collapse: collapse; }
+    th, td { padding: 8px 10px; border-bottom: 1px solid #e0e0e0; text-align: left; }
+    th { background: #1f4e78; color: #fff; }
+    input, select { padding: 6px 8px; margin: 4px 6px 4px 0; }
+    button { padding: 6px 12px; cursor: pointer; }
+    .resumen { background: #eef4fb; padding: 10px 14px; border-radius: 6px; font-weight: bold; }
+    .meta { color: #888; font-size: 12px; }
+  </style>
+</head>
+<body ng-controller="EmpleadosCtrl">
+
+  <div class="card">
+    <h2>Empleados</h2>
+    <input type="text" ng-model="busqueda" ng-change="buscar()" placeholder="Buscar en el servidor...">
+    <span class="meta">Peticiones de búsqueda enviadas: {{ totalPeticiones }}</span>
+
+    <resumen-salarios empleados="empleados"></resumen-salarios>
+
+    <table>
+      <tr>
+        <th>Documento</th><th>Nombres</th><th>Apellidos</th><th>Departamento</th><th>Salario</th>
+      </tr>
+      <tr ng-repeat="emp in resultados">
+        <td>{{ emp.documento }}</td>
+        <td>{{ emp.nombres }}</td>
+        <td>{{ emp.apellidos }}</td>
+        <td>{{ emp.departamento }}</td>
+        <td>{{ emp.salario | currency:'$':0 }}</td>
+      </tr>
+    </table>
+    <p class="meta">Última actualización del reloj: {{ ultimaActualizacion | date:'HH:mm:ss' }}</p>
+  </div>
+
+  <div class="card">
+    <h3>Nuevo empleado</h3>
+    <form name="formEmpleado" ng-submit="guardar()">
+      <input type="text" ng-model="nuevo.documento" placeholder="Documento" required>
+      <input type="text" ng-model="nuevo.nombres" placeholder="Nombres" required>
+      <input type="text" ng-model="nuevo.apellidos" placeholder="Apellidos" required>
+      <input type="text" ng-model="nuevo.departamento" placeholder="Departamento" required>
+      <input type="number" ng-model="nuevo.salario" placeholder="Salario" required>
+      <button type="submit">Guardar</button>
+    </form>
+    <p class="meta">Nota: reporte de un usuario — "cuando guardo un empleado, no aparece en la lista hasta que escribo algo en el buscador".</p>
+  </div>
+
+  <script src="js/app.js"></script>
+  <script src="js/empleado.service.js"></script>
+  <script src="js/empleados.controller.js"></script>
+  <script src="js/resumen-salarios.directive.js"></script>
+</body>
+</html>
