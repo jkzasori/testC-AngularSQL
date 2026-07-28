@@ -29,7 +29,11 @@ CREATE TABLE EmpleadosHistorico  (
     FechaAccion datetime2 not null default sysdatetime(),
     Usuario nvarchar(100) not null default suser_name(),
     Observacion nvarchar(500) null,
-    constraint CK_EmpleadosHistorico_Accion check (Accion in ('INSERT','UPDATE','DELETE')),
+    ALTER TABLE EmpleadosHistorico DROP CONSTRAINT CK_EmpleadosHistorico_Accion;
+
+ALTER TABLE EmpleadosHistorico
+ADD CONSTRAINT CK_EmpleadosHistorico_Accion
+    CHECK (Accion IN ('INSERT','UPDATE','DELETE','UPDATE_SALARIO'));
     constraint FK_EmpleadosHistorico_Empleado foreign key (EmpleadoId) references Empleados(EmpleadoId),
     INDEX IX_EmpleadosHistorico_EmpleadoId (EmpleadoId)
 )
