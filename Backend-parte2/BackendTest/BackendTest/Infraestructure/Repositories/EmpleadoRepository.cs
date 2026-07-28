@@ -48,7 +48,7 @@ public class EmpleadoRepository : IEmpleadoRepository
         try
         {
             await _context.Database.ExecuteSqlInterpolatedAsync(
-                $"EXEC sp_ProcesarAumentoSalarial @Departamento = {departamento}, @PorcentajeAumento = {porcentaje}, @Usuario = {usuario}");
+                $"EXEC sp_ProcesarAumentoSalarial @Departamento = {departamento}, @Porcentaje = {porcentaje}, @Usuario = {usuario}");
         }
         catch (SqlException ex)
         {
