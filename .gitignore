@@ -1,0 +1,55 @@
+## .NET / Visual Studio
+
+# Carpetas de compilacion
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+
+# Archivos de usuario (configuracion local del IDE, no se comparten)
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Carpeta de Visual Studio
+.vs/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code (si no quieres versionar configuracion local del editor)
+.vscode/
+
+# Resultados de pruebas
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+# NuGet
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+*.nuget.props
+*.nuget.targets
+
+# Publicacion / artefactos de build
+*.pubxml
+*.publishsettings
+PublishScripts/
+
+# Archivos de configuracion con secretos (no versionar credenciales)
+appsettings.Development.json
+appsettings.*.local.json
+*.env
+
+# Logs
+*.log
+
+# Archivos temporales del sistema operativo
+Thumbs.db
+.DS_Store
