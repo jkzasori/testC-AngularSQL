@@ -9,7 +9,7 @@ angular.module('empleadosApp').directive('resumenSalarios', function() {
         console.log('calculando total...');
         var t = 0;
         angular.forEach($scope.empleados, function(e) { t += e.salario; });
-        // total y promedio eran funciones y angular no sabé que tiene eso o cuál es el resultado 
+        // total y promedio eran funciones y angular no sabe que tiene eso o cuál es el resultado 
         // entonces en cada render o digest en este caso, se ejecutaban dichas funciones 
         // cosa que no pasa con lasvariables y por eso se cambió a variables; para evitar 
         // esa ejecución innecesaria

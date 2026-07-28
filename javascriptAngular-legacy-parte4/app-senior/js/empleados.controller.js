@@ -17,8 +17,12 @@ angular.module('empleadosApp').controller('EmpleadosCtrl', function($scope, $int
   // Cada tecla del buscador dispara una peticion "al servidor"
   $scope.buscar = function() {
     $scope.totalPeticiones++;
+    var textoBuscado = $scope.busqueda; // copia del texto antes hacer la petición
     EmpleadoService.buscar($scope.busqueda).then(function(data) {
-      $scope.resultados = data;
+      // Si hay coincidencia se muestran los datos sino se descarta
+      if (textoBuscado === $scope.busqueda) {
+        $scope.resultados = data;
+      }
     });
   };
 
