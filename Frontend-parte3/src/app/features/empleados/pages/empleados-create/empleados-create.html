@@ -1,0 +1,97 @@
+<p>empleados-create works!</p>
+<h2>Crear empleado</h2>
+
+<form [formGroup]="form" (ngSubmit)="submit()">
+  <div>
+    <label for="documento">Documento</label>
+    <input id="documento" formControlName="documento" />
+    @if (form.controls.documento.pending) {
+      <small>Verificando disponibilidad...</small>
+    }
+    @if (form.controls.documento.touched && form.controls.documento.invalid) {
+      @if (form.controls.documento.hasError('required')) {
+        <small>El documento es obligatorio.</small>
+      }
+      @if (form.controls.documento.hasError('documentoFormato')) {
+        <small>Debe tener entre 6 y 10 dígitos numéricos.</small>
+      }
+      @if (form.controls.documento.hasError('documentoDuplicado')) {
+        <small>Ya existe un empleado con este documento.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="nombres">Nombres</label>
+    <input id="nombres" formControlName="nombres" />
+    @if (form.controls.nombres.touched && form.controls.nombres.hasError('required')) {
+      <small>Los nombres son obligatorios.</small>
+    }
+  </div>
+
+  <div>
+    <label for="apellidos">Apellidos</label>
+    <input id="apellidos" formControlName="apellidos" />
+    @if (form.controls.apellidos.touched && form.controls.apellidos.hasError('required')) {
+      <small>Los apellidos son obligatorios.</small>
+    }
+  </div>
+
+  <div>
+    <label for="email">Email</label>
+    <input id="email" type="email" formControlName="email" />
+    @if (form.controls.email.touched && form.controls.email.invalid) {
+      @if (form.controls.email.hasError('required')) {
+        <small>El email es obligatorio.</small>
+      }
+      @if (form.controls.email.hasError('email')) {
+        <small>El email no tiene un formato válido.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="cargo">Cargo</label>
+    <input id="cargo" formControlName="cargo" />
+    @if (form.controls.cargo.touched && form.controls.cargo.hasError('required')) {
+      <small>El cargo es obligatorio.</small>
+    }
+  </div>
+
+  <div>
+    <label for="departamento">Departamento</label>
+    <input id="departamento" formControlName="departamento" />
+    @if (form.controls.departamento.touched && form.controls.departamento.hasError('required')) {
+      <small>El departamento es obligatorio.</small>
+    }
+  </div>
+
+  <div>
+    <label for="salario">Salario</label>
+    <input id="salario" type="number" step="0.01" formControlName="salario" />
+    @if (form.controls.salario.touched && form.controls.salario.invalid) {
+      @if (form.controls.salario.hasError('required')) {
+        <small>El salario es obligatorio.</small>
+      }
+      @if (form.controls.salario.hasError('min')) {
+        <small>El salario debe ser mayor a 0.</small>
+      }
+    }
+  </div>
+
+  <div>
+    <label for="fechaIngreso">Fecha de ingreso</label>
+    <input id="fechaIngreso" type="date" formControlName="fechaIngreso" />
+    @if (form.controls.fechaIngreso.touched && form.controls.fechaIngreso.hasError('required')) {
+      <small>La fecha de ingreso es obligatoria.</small>
+    }
+  </div>
+
+  @if (serverError()) {
+    <p class="error">{{ serverError() }}</p>
+  }
+
+  <button type="submit" [disabled]="submitting()">
+    {{ submitting() ? 'Guardando...' : 'Crear empleado' }}
+  </button>
+</form>
