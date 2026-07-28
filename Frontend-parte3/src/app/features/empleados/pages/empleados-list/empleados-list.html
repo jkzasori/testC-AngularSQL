@@ -1,0 +1,23 @@
+<h2>Empleados</h2>
+
+<input [formControl]="departamentoControl" placeholder="Filtrar por departamento" />
+
+<table class="listTable">
+  <thead>
+    <tr><th>Documento</th><th>Nombre</th><th>Departamento</th><th>Salario</th></tr>
+  </thead>
+  <tbody>
+    @for (e of empleados(); track e.empleadoId) {
+      <tr>
+        <td>{{ e.documento }}</td>
+        <td>{{ e.nombres }} {{ e.apellidos }}</td>
+        <td>{{ e.departamento }}</td>
+        <td>{{ e.salario }}</td>
+      </tr>
+    }
+  </tbody>
+</table>
+
+<button (click)="goToPage(page() - 1)" [disabled]="page() <= 1">Anterior</button>
+<span>Página {{ page() }} de {{ totalPages() }}</span>
+<button (click)="goToPage(page() + 1)" [disabled]="page() >= totalPages()">Siguiente</button>
